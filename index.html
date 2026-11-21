@@ -1,345 +1,1257 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ishwor Gupta - Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ishwor Gupta | Computer Engineering Student &amp; Developer</title>
+  <meta name="description" content="Personal portfolio of Ishwor Gupta — 2nd Year Bachelor of Computer Engineering student at Mega College of Engineering, Class Representative (CR), and Vice President of Mega Computing Club." />
 
-<style>
-    *{
-        margin:0;
-        padding:0;
-        box-sizing:border-box;
-        font-family: Arial, sans-serif;
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Warm Notebook Paper Palette & Times New Roman Typography -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: '#FAF8F5',        /* Warm off-white notebook paper */
+            sand: '#F2EFE9',         /* Soft warm card background */
+            sandDark: '#E5DFD5',     /* Subtle card & divider border */
+            ink: '#1E242B',          /* Deep charcoal ink */
+            inkMuted: '#4A5568',     /* Muted slate ink */
+            terracotta: '#B85042',   /* Warm terracotta accent */
+            terracottaDark: '#963D31',
+            forest: '#2D5A4C',       /* Natural forest green accent */
+            forestLight: '#E8F0ED'
+          },
+          fontFamily: {
+            serif: ['"Times New Roman"', 'Times', 'Georgia', 'serif'],
+            sans: ['"Times New Roman"', 'Times', 'Georgia', 'serif'],
+            mono: ['"Times New Roman"', 'Times', 'Georgia', 'serif']
+          },
+          boxShadow: {
+            notebook: '0 8px 24px -6px rgba(30, 36, 43, 0.08)',
+            photo: '10px 10px 0px #E5DFD5'
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    * {
+      font-family: "Times New Roman", Times, Georgia, serif;
     }
 
-    body{
-        background:#0f172a;
-        color:white;
+    /* Preserve Font Awesome icon glyphs */
+    .fa, .fas, .far, .fal, .fab, .fa-solid, .fa-regular, .fa-brands {
+      font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
     }
 
-    /* HEADER */
-    header{
-    text-align:center;
-    padding:80px 20px;
-    background:linear-gradient(135deg,#1e293b,#0f172a);
-}
-header h1{
-    font-size:60px;
-    color:#38bdf8;
-    margin-bottom:10px;
-    text-shadow:0 0 15px rgba(56,189,248,0.4);
-}
-
-.subtitle{
-    font-size:20px;
-    color:#cbd5e1;
-    margin-bottom:20px;
-}
-
-.intro{
-    max-width:750px;
-    margin:0 auto 25px auto;
-    line-height:1.8;
-    color:#e2e8f0;
-    font-size:15px;
-}
-
-    header p{
-        color:#cbd5e1;
-        margin-top:10px;
-        font-size:10px;
-        /* line-height:1.6; */
+    body {
+      background-color: #FAF8F5;
+      color: #1E242B;
+      background-image: radial-gradient(#E2DDD3 1px, transparent 1px);
+      background-size: 24px 24px;
+      overflow-x: hidden;
     }
 
-    /* PROFILE SECTION */
-    .profile{
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        flex-wrap:wrap;
-        padding:40px;
-        gap:30px;
+    /* Blinking cursor for human-paced role typing */
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.15em;
+      background-color: #B85042;
+      margin-left: 3px;
+      vertical-align: middle;
+      animation: blinkCursor 0.9s step-end infinite;
     }
 
-    .photo{
-    width:180px;
-    height:180px;
-    border-radius:50%;
-    border:3px solid #38bdf8;
-    align-items:center;
-    display:flex;
-    justify-content:center;
-    font-size:14px;
-    color:#94a3b8;
-    overflow:hidden;
-    animation:pulse 2s infinite;
-    box-shadow:0 0 20px rgba(56,189,248,0.5);
-}
-
-.photo img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-    .info{
-        max-width:500px;
+    @keyframes blinkCursor {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
 
-    .info h2{
-        color:#38bdf8;
-        margin-bottom:10px;
+    /* Subtle card elevation on hover */
+    .notebook-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .notebook-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px -8px rgba(30, 36, 43, 0.12);
     }
 
-    /* SECTIONS */
-    section{
-        padding:40px;
-        max-width:1000px;
-        margin:auto;
+    /* Smooth section reveal */
+    .reveal-section {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .reveal-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .card{
-        background:#1e293b;
-        padding:20px;
-        margin:15px 0;
-        border-radius:12px;
-        transition:0.3s;
+    /* Clean Single-Page Print Layout for Resume Modal */
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+      #resumeModal,
+      #resumeContainer,
+      #resumePrintableArea,
+      #resumePrintableArea * {
+        visibility: visible !important;
+      }
+      #resumeModal {
+        position: absolute !important;
+        inset: 0 !important;
+        background: #FFFFFF !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: visible !important;
+      }
+      #resumeContainer {
+        box-shadow: none !important;
+        border: none !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        border-radius: 0 !important;
+      }
+      #resumePrintableArea {
+        max-height: none !important;
+        overflow: visible !important;
+        padding: 0.4in !important;
+      }
+      .no-print {
+        display: none !important;
+      }
     }
-
-    .card:hover{
-        transform:translateY(-5px);
-    }
-
-    h2{
-        color:#38bdf8;
-        margin-bottom:10px;
-    }
-
-    /* SKILLS */
-    .skill{
-        margin:10px 0;
-    }
-
-    .bar{
-        background:#334155;
-        border-radius:10px;
-        overflow:hidden;
-    }
-
-    .fill{
-        height:10px;
-        background:#38bdf8;
-    }
-
-    /* BUTTON */
-    .btn{
-        display:inline-block;
-        padding:10px 15px;
-        background:#38bdf8;
-        color:black;
-        border-radius:6px;
-        text-decoration:none;
-        margin-top:10px;
-    }
-
-    /* CONTACT */
-    input, textarea{
-        width:100%;
-        padding:10px;
-        margin-top:10px;
-        border:none;
-        border-radius:6px;
-    }
-
-    /* FOOTER */
-    footer{
-        text-align:center;
-        padding:20px;
-        background:#1e293b;
-        margin-top:20px;
-    }
-
-    /* ANIMATIONS */
-    @keyframes fadeDown{
-        from{opacity:0; transform:translateY(-20px);}
-        to{opacity:1; transform:translateY(0);}
-    }
-
-    @keyframes pulse{
-        0%{transform:scale(1);}
-        50%{transform:scale(1.05);}
-        100%{transform:scale(1);}
-    }
-</style>
-
+  </style>
 </head>
-<body>
+<body id="top" class="antialiased selection:bg-terracotta/20 selection:text-ink">
 
-    <header>
-        <h1>Ishwor Gupta</h1>
-    
-        <p class="subtitle">
-            Computer Engineering Student • Class Representative (CR) • Aspiring Software Developer
-        </p>
-    
-        <p class="intro">
-            Passionate about programming, web development, software development,
-            and technology-driven solutions. Dedicated to continuous learning,
-            leadership, and creating educational resources that support engineering students and communities.
-        </p>
-    </header>
+  <!-- ==================== 1. STICKY NAVIGATION BAR ==================== -->
+  <header class="sticky top-0 z-40 bg-paper/95 backdrop-blur-sm border-b border-sandDark">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <!-- Brand / Monogram -->
+      <a href="#top" class="flex items-center gap-2.5 group">
+        <span class="w-9 h-9 rounded-xl bg-ink text-paper font-bold text-base flex items-center justify-center group-hover:bg-terracotta transition-colors">
+          IG
+        </span>
+        <div class="leading-tight">
+          <span class="font-bold text-lg text-ink tracking-tight block">Ishwor Gupta</span>
+          <span class="text-xs text-inkMuted hidden sm:block">B.E. Computer Engineering &bull; 2nd Year</span>
+        </div>
+      </a>
 
-<!-- PROFILE -->
-<div class="profile">
-    <div class="photo">
-        <img src="profile.jpg" alt="Profile Photo">
-    </div>
-    <div class="info">
-        <h2>About Me</h2>
-    
-        <p>
-            Hello! I'm <strong>Ishwor Gupta</strong>, a Bachelor of Computer Engineering student
-            at Mega College of Engineering. I currently serve as the
-            <strong>Class Representative (CR)</strong>, where I actively contribute to student
-            leadership, communication, and academic coordination.
-        </p>
-    
-        <br>
-    
-        <p>
-            I am passionate about technology, programming, and continuous learning.
-            My technical skills include <strong>HTML, Python, C, and C++</strong>,
-            and I enjoy building websites, solving programming problems,
-            and exploring new technologies. I am particularly interested in
-            web development, software development, and creating digital solutions
-            that help students and communities.
-        </p>
-    
-        <br>
-    
-        <p>
-            Beyond academics, I manage and support several student-focused platforms,
-            including the <strong>PU Computer Engineering Notes</strong> website and
-            engineering student social media communities. These experiences have strengthened
-            my leadership, teamwork, project management, and communication skills.
-        </p>
-    
-        <br>
-    
-        <p>
-            My goal is to continuously improve my technical expertise, contribute to
-            meaningful projects, and grow as a professional engineer while making a
-            positive impact through technology and innovation.
-        </p>
-    </div>
-<!-- EDUCATION -->
-<section>
-    <div class="card">
-        <div class="card">
-            <h2>🎓 Education</h2>
-            <h3>Bachelor of Computer Engineering</h3>
-            <p>
-                <strong>Mega College of Engineering</strong><br>
-                Affiliated with Purbanchal University
-            </p>
-            <p>
-                Currently pursuing a Bachelor's degree in Computer Engineering,
-        with a strong focus on programming, web development,
-        software engineering, problem-solving, and emerging technologies.
-    </p>
-    <p>
-        As a Class Representative (CR), I actively participate in
-        student leadership, academic coordination, and collaborative
-        initiatives that enhance the learning environment.
-    </p>
-</div>
+      <!-- Desktop Menu (About Me & Education separated; no LinkedIn link in nav bar) -->
+      <nav class="hidden md:flex items-center gap-6 text-base font-medium text-inkMuted">
+        <a href="#about" class="hover:text-terracotta transition-colors">About Me</a>
+        <a href="#education" class="hover:text-terracotta transition-colors">Education</a>
+        <a href="#skills" class="hover:text-terracotta transition-colors">Skills</a>
+        <a href="#projects" class="hover:text-terracotta transition-colors">Projects</a>
+        <a href="#leadership" class="hover:text-terracotta transition-colors">Leadership</a>
+        <a href="#contact" class="hover:text-terracotta transition-colors">Contact</a>
+      </nav>
 
-    <div class="card">
-        <h2>Skills</h2>
-    
-        <div class="skill">HTML
-            <div class="bar"><div class="fill" style="width:85%"></div></div>
-        </div>
-    
-        <div class="skill">Python
-            <div class="bar"><div class="fill" style="width:75%"></div></div>
-        </div>
-    
-        <div class="skill">C Programming
-            <div class="bar"><div class="fill" style="width:80%"></div></div>
-        </div>
-    
-        <div class="skill">C++
-            <div class="bar"><div class="fill" style="width:75%"></div></div>
-        </div>
-    
-        <div class="skill">Web Development
-            <div class="bar"><div class="fill" style="width:80%"></div></div>
-        </div>
-    
-        <div class="skill">Problem Solving
-            <div class="bar"><div class="fill" style="width:85%"></div></div>
-        </div>
-    
-        <div class="skill">Leadership
-            <div class="bar"><div class="fill" style="width:90%"></div></div>
-        </div>
-    
-        <div class="skill">Project Management
-            <div class="bar"><div class="fill" style="width:75%"></div></div>
-        </div>
-    
-        <div class="skill">Social Media Management
-            <div class="bar"><div class="fill" style="width:90%"></div></div>
-        </div>
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-2.5">
+        <button
+          type="button"
+          onclick="openResumeModal()"
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-forest text-white text-sm font-bold hover:bg-ink transition-colors shadow-sm cursor-pointer"
+        >
+          <i class="fa-regular fa-file-lines"></i>
+          <span>Resume</span>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button
+          type="button"
+          id="mobileMenuBtn"
+          onclick="toggleMobileMenu()"
+          aria-label="Toggle Menu"
+          class="md:hidden p-2.5 rounded-xl bg-sand border border-sandDark text-ink hover:bg-sandDark transition-colors cursor-pointer"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
     </div>
 
-    <div class="card">
-        <h2>Projects</h2>
-        <p>📘 Engineering Notes Blog Website</p>
-        <a class="btn" href="https://pucomputerengineeringnotes.blogspot.com/" target="_blank">
-            Visit Blog
+    <!-- Mobile Dropdown -->
+    <div id="mobileMenu" class="hidden md:hidden bg-paper border-b border-sandDark px-4 py-3 space-y-1.5 text-base font-medium">
+      <a href="#about" onclick="closeMobileMenu()" class="block py-2 px-3 rounded-lg hover:bg-sand">About Me</a>
+      <a href="#education" onclick="closeMobileMenu()" class="block py-2 px-3 rounded-lg hover:bg-sand">Education</a>
+      <a href="#skills" onclick="closeMobileMenu()" class="block py-2 px-3 rounded-lg hover:bg-sand">Skills</a>
+      <a href="#projects" onclick="closeMobileMenu()" class="block py-2 px-3 rounded-lg hover:bg-sand">Projects</a>
+      <a href="#leadership" onclick="closeMobileMenu()" class="block py-2 px-3 rounded-lg hover:bg-sand">Leadership</a>
+      <a href="#contact" onclick="closeMobileMenu()" class="block py-2 px-3 rounded-lg hover:bg-sand">Contact</a>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-20 space-y-16">
+
+    <!-- ==================== 2. HERO & PERMANENT PROFILE PHOTO ==================== -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-10 items-center">
+      <!-- Left Column: Introduction, Human Typing & Profile Links -->
+      <div class="lg:col-span-7 space-y-5">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sand border border-sandDark text-xs sm:text-sm font-bold text-ink">
+          <span class="w-2 h-2 rounded-full bg-forest animate-pulse"></span>
+          <span>Mega College of Engineering &bull; Purbanchal University</span>
+        </div>
+
+        <div class="space-y-3">
+          <p class="text-sm uppercase tracking-widest text-terracotta font-bold">
+            Portfolio &amp; Academic Profile
+          </p>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-ink leading-tight">
+            Ishwor Gupta
+          </h1>
+
+          <!-- Human-Paced Typing Subtitle -->
+          <div class="bg-sand/90 border border-sandDark rounded-2xl px-4 py-2.5 inline-flex flex-wrap items-center gap-2 max-w-full shadow-sm">
+            <span class="text-sm sm:text-base font-bold text-terracotta select-none">Role:</span>
+            <span id="humanTypingText" class="text-base sm:text-xl font-bold text-forest">Computer Engineering Student (2nd Year)</span><span class="typing-cursor" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <p class="text-base sm:text-lg text-inkMuted leading-relaxed max-w-2xl">
+          Passionate about programming, web development, software development, and technology-driven solutions. Dedicated to continuous learning, student leadership as <strong class="text-ink">Class Representative (CR)</strong> and <strong class="text-ink">Vice President of Mega Computing Club</strong>, and creating educational resources that support engineering students and communities.
+        </p>
+
+        <!-- Primary CTA Buttons -->
+        <div class="flex flex-wrap items-center gap-3 pt-1">
+          <button
+            type="button"
+            onclick="openResumeModal()"
+            class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-terracotta text-white font-bold text-base hover:bg-terracottaDark transition-all shadow-sm cursor-pointer"
+          >
+            <i class="fa-solid fa-file-arrow-down"></i>
+            <span>View &amp; Print Resume</span>
+          </button>
+
+          <a
+            href="#projects"
+            class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-sand border border-sandDark text-ink font-bold text-base hover:bg-sandDark/70 transition-all"
+          >
+            <i class="fa-solid fa-code"></i>
+            <span>Explore Projects</span>
+          </a>
+
+          <a
+            href="#contact"
+            class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-paper border border-sandDark text-ink font-bold text-base hover:border-terracotta hover:text-terracotta transition-colors"
+          >
+            <i class="fa-regular fa-paper-plane"></i>
+            <span>Get in Touch</span>
+          </a>
+        </div>
+
+        <!-- All 5 Real Profile & Social Links -->
+        <div class="pt-3 flex flex-wrap items-center gap-2.5">
+          <span class="text-xs uppercase tracking-wider font-bold text-inkMuted mr-1">Connect:</span>
+
+          <a
+            href="https://github.com/ishworgupta"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-paper border border-sandDark text-sm font-bold text-ink hover:border-terracotta hover:text-terracotta transition-colors"
+          >
+            <i class="fa-brands fa-github"></i>
+            <span>GitHub</span>
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/ishwor-gupta/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-paper border border-sandDark text-sm font-bold text-ink hover:border-terracotta hover:text-terracotta transition-colors"
+          >
+            <i class="fa-brands fa-linkedin"></i>
+            <span>LinkedIn</span>
+          </a>
+
+          <a
+            href="https://pucomputerengineeringnotes.blogspot.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-paper border border-sandDark text-sm font-bold text-ink hover:border-terracotta hover:text-terracotta transition-colors"
+          >
+            <i class="fa-solid fa-book-open"></i>
+            <span>Notes Blog</span>
+          </a>
+
+          <a
+            href="https://www.facebook.com/ishworgupta949"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-paper border border-sandDark text-sm font-bold text-ink hover:border-terracotta hover:text-terracotta transition-colors"
+          >
+            <i class="fa-brands fa-facebook"></i>
+            <span>Facebook</span>
+          </a>
+
+          <a
+            href="https://www.instagram.com/ishworgupta949/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-paper border border-sandDark text-sm font-bold text-ink hover:border-terracotta hover:text-terracotta transition-colors"
+          >
+            <i class="fa-brands fa-instagram"></i>
+            <span>Instagram</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Permanent Profile Photo Card ('profile.png' / 'profile.jpg' in same folder) -->
+      <div class="lg:col-span-5 flex justify-center">
+        <div class="w-full max-w-sm bg-sand border border-sandDark rounded-3xl p-4 sm:p-5 shadow-photo relative">
+          <!-- Notebook Window Header -->
+          <div class="flex items-center justify-between pb-3 mb-3 border-b border-sandDark">
+            <div class="flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-terracotta/80"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-forest/80"></span>
+            </div>
+            <span class="text-xs font-bold text-inkMuted">Ishwor Gupta</span>
+            <span class="text-xs px-2.5 py-0.5 rounded-md bg-forestLight text-forest font-bold">2nd Year</span>
+          </div>
+
+          <!-- Permanent Portrait Frame (Automatically loads profile.png, or falls back to profile.jpg) -->
+          <div class="relative aspect-[4/4.3] w-full rounded-2xl overflow-hidden bg-white border border-sandDark flex items-center justify-center">
+            <img
+              id="profilePhoto"
+              src="profile.png"
+              alt="Ishwor Gupta - Computer Engineering Student"
+              onload="this.classList.remove('hidden'); document.getElementById('fallbackPortrait').classList.add('hidden');"
+              onerror="if (!this.dataset.triedJpg) { this.dataset.triedJpg = '1'; this.src = 'profile.jpg'; } else { this.classList.add('hidden'); document.getElementById('fallbackPortrait').classList.remove('hidden'); }"
+              class="w-full h-full object-cover object-top"
+            />
+
+            <!-- Fallback Portrait (shown only if neither profile.png nor profile.jpg is in the same folder) -->
+            <div id="fallbackPortrait" class="hidden w-full h-full flex flex-col items-center justify-center p-5 text-center bg-gradient-to-b from-[#F5EFE6] to-[#E8DFD1]">
+              <svg viewBox="0 0 200 200" class="w-36 h-36 mb-2" aria-hidden="true">
+                <circle cx="100" cy="100" r="88" fill="#FAF8F5" stroke="#E2DDD3" stroke-width="3" />
+                <path d="M52 175 C52 138, 148 138, 148 175" fill="#2D5A4C" />
+                <circle cx="100" cy="86" r="34" fill="#D9A78B" />
+                <path d="M66 80 C66 48, 134 48, 134 80 C128 64, 72 64, 66 80 Z" fill="#1E242B" />
+                <circle cx="89" cy="86" r="3" fill="#1E242B" />
+                <circle cx="111" cy="86" r="3" fill="#1E242B" />
+                <path d="M91 101 Q100 109 109 101" stroke="#1E242B" stroke-width="2.5" fill="none" stroke-linecap="round" />
+              </svg>
+              <p class="text-xs font-bold text-ink">Place <span class="text-terracotta">profile.png</span> (or <span class="text-terracotta">profile.jpg</span>)</p>
+              <p class="text-xs text-inkMuted mt-0.5">in the same folder as this HTML file</p>
+            </div>
+          </div>
+
+          <!-- Caption Strip Below Photo -->
+          <div class="mt-3.5 bg-paper rounded-2xl p-3 border border-sandDark flex items-center justify-between text-xs">
+            <div>
+              <p class="font-bold text-sm text-ink">Ishwor Gupta</p>
+              <p class="text-inkMuted">VP, Mega Computing Club &bull; CR</p>
+            </div>
+            <a
+              href="https://pucomputerengineeringnotes.blogspot.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-sand border border-sandDark text-ink font-bold hover:border-terracotta hover:text-terracotta transition-colors"
+            >
+              <i class="fa-solid fa-book-open text-terracotta"></i>
+              <span>PU Notes</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 3. ABOUT ME SECTION (SEPARATED) ==================== -->
+    <section id="about" class="reveal-section scroll-mt-24 space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b-2 border-sandDark pb-3">
+        <div>
+          <span class="text-xs uppercase tracking-widest text-terracotta font-bold">01 / Biography</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-ink mt-1">About Me</h2>
+        </div>
+        <span class="inline-flex items-center gap-2 text-xs font-bold text-forest bg-forestLight px-3 py-1.5 rounded-lg self-start sm:self-auto">
+          <i class="fa-solid fa-user-check"></i>
+          Student Leader &bull; Aspiring Developer
+        </span>
+      </div>
+
+      <div class="bg-sand border border-sandDark rounded-3xl p-6 sm:p-8 shadow-notebook space-y-4">
+        <div class="space-y-4 text-base sm:text-lg text-inkMuted leading-relaxed">
+          <p>
+            Hello! I'm <strong class="text-ink">Ishwor Gupta</strong>, a Bachelor of Computer Engineering student at <strong class="text-ink">Mega College of Engineering</strong> (affiliated with Purbanchal University). I currently serve as the <strong class="text-ink">Class Representative (CR)</strong> and <strong class="text-ink">Vice President of Mega Computing Club</strong>, where I actively contribute to student leadership, communication, and academic coordination.
+          </p>
+          <p>
+            I am passionate about technology, programming, and continuous learning. My technical skills include <strong class="text-ink">HTML, Python, C, and C++</strong>, and I enjoy building websites, solving programming problems, and exploring new technologies. I am particularly interested in web development, software development, and creating digital solutions that help students and communities.
+          </p>
+          <p>
+            Beyond academics, I manage and support several student-focused platforms, including the <strong class="text-ink">PU Computer Engineering Notes</strong> website and engineering student social media communities. These experiences have strengthened my leadership, teamwork, project management, and communication skills.
+          </p>
+          <p>
+            My goal is to continuously improve my technical expertise, contribute to meaningful projects, and grow as a professional engineer while making a positive impact through technology and innovation.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 4. EDUCATION SECTION (SEPARATED) ==================== -->
+    <section id="education" class="reveal-section scroll-mt-24 space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b-2 border-sandDark pb-3">
+        <div>
+          <span class="text-xs uppercase tracking-widest text-forest font-bold">02 / Academic Background</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-ink mt-1">Education</h2>
+        </div>
+        <span class="text-xs font-bold text-inkMuted">Purbanchal University Affiliation</span>
+      </div>
+
+      <div class="bg-paper border border-sandDark rounded-3xl p-6 sm:p-8 shadow-notebook relative overflow-hidden space-y-5">
+        <div class="absolute top-0 left-0 w-1.5 h-full bg-forest"></div>
+
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="space-y-1.5">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-forestLight text-forest text-xs font-bold">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <span>2nd Year &bull; Currently Pursuing</span>
+            </div>
+            <h3 class="text-2xl font-bold text-ink pt-1">Bachelor in Computer Engineering</h3>
+            <p class="text-lg font-bold text-terracotta">Mega College of Engineering</p>
+            <p class="text-sm sm:text-base text-inkMuted">Affiliated with Purbanchal University</p>
+          </div>
+
+          <div class="bg-sand border border-sandDark rounded-2xl px-4 py-3 text-xs sm:text-sm font-bold text-ink shrink-0 space-y-1">
+            <div>Class Role: <span class="text-terracotta">Class Representative (CR)</span></div>
+            <div>Club Role: <span class="text-forest">Vice President, Mega Computing Club</span></div>
+          </div>
+        </div>
+
+        <p class="text-base sm:text-lg text-inkMuted leading-relaxed">
+          Focusing on programming fundamentals, object-oriented programming (C++), Python scripting, web development, data structures, problem-solving, and collaborative student engineering initiatives.
+        </p>
+
+        <div class="pt-4 border-t border-sandDark flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-inkMuted">
+          <span>Core Subjects: Programming (C, C++, Python), Web Development, Problem Solving</span>
+          <span>Status: 2nd Year Ongoing</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 5. TECHNICAL & LEADERSHIP SKILLS (FILTERABLE) ==================== -->
+    <section id="skills" class="reveal-section scroll-mt-24 space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b-2 border-sandDark pb-3">
+        <div>
+          <span class="text-xs uppercase tracking-widest text-terracotta font-bold">03 / Capabilities</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-ink mt-1">Technical &amp; Leadership Skills</h2>
+        </div>
+
+        <!-- Interactive Skill Filter Tabs -->
+        <div class="inline-flex p-1 rounded-xl bg-sand border border-sandDark self-start">
+          <button type="button" data-filter="all" class="skill-tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-ink text-paper transition-colors cursor-pointer">
+            All Skills
+          </button>
+          <button type="button" data-filter="technical" class="skill-tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold text-inkMuted hover:text-ink transition-colors cursor-pointer">
+            Technical
+          </button>
+          <button type="button" data-filter="leadership" class="skill-tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold text-inkMuted hover:text-ink transition-colors cursor-pointer">
+            Leadership
+          </button>
+        </div>
+      </div>
+
+      <div id="skillsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="skill-card notebook-card bg-sand border border-sandDark rounded-2xl p-5" data-category="technical">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold text-lg text-ink flex items-center gap-2">
+              <i class="fa-brands fa-html5 text-terracotta"></i> HTML
+            </span>
+            <span class="text-xs font-bold px-2.5 py-0.5 rounded bg-forestLight text-forest">Technical</span>
+          </div>
+          <p class="text-sm sm:text-base text-inkMuted leading-relaxed">Semantic page structure, accessible layouts, and clean web markup.</p>
+        </div>
+
+        <div class="skill-card notebook-card bg-sand border border-sandDark rounded-2xl p-5" data-category="technical">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold text-lg text-ink flex items-center gap-2">
+              <i class="fa-brands fa-python text-forest"></i> Python
+            </span>
+            <span class="text-xs font-bold px-2.5 py-0.5 rounded bg-forestLight text-forest">Technical</span>
+          </div>
+          <p class="text-sm sm:text-base text-inkMuted leading-relaxed">Scripting, logic building, data handling, and algorithmic problem solving.</p>
+        </div>
+
+        <div class="skill-card notebook-card bg-sand border border-sandDark rounded-2xl p-5" data-category="technical">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold text-lg text-ink flex items-center gap-2">
+              <i class="fa-solid fa-code text-terracotta"></i> C Programming
+            </span>
+            <span class="text-xs font-bold px-2.5 py-0.5 rounded bg-forestLight text-forest">Technical</span>
+          </div>
+          <p class="text-sm sm:text-base text-inkMuted leading-relaxed">Structured programming, pointers, memory fundamentals, and console applications.</p>
+        </div>
+
+        <div class="skill-card notebook-card bg-sand border border-sandDark rounded-2xl p-5" data-category="technical">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold text-lg text-ink flex items-center gap-2">
+              <i class="fa-solid fa-laptop-code text-forest"></i> C++
+            </span>
+            <span class="text-xs font-bold px-2.5 py-0.5 rounded bg-forestLight text-forest">Technical</span>
+          </div>
+          <p class="text-sm sm:text-base text-inkMuted leading-relaxed">Object-oriented programming (OOP), classes, inheritance, and standard libraries.</p>
+        </div>
+
+        <div class="skill-card notebook-card bg-sand border border-sandDark rounded-2xl p-5" data-category="technical">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold text-lg text-ink flex items-center gap-2">
+              <i class="fa-solid fa-globe text-terracotta"></i> Web Development
+            </span>
+            <span class="text-xs font-bold px-2.5 py-0.5 rounded bg-forestLight text-forest">Technical</span>
+          </div>
+          <p class="text-sm sm:text-base text-inkMuted leading-relaxed">Building responsive student portals, educational blogs, and clean web interfaces.</p>
+        </div>
+
+        <div class="skill-card notebook-card bg-sand border border-sandDark rounded-2xl p-5" data-category="technical">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold text-lg text-ink flex items-center gap-2">
+              <i class="fa-solid fa-puzzle-piece text-forest"></i> Problem Solving
+            </span>
+            <span class="text-xs font-bold px-2.5 py-0.5 rounded bg-forestLight text-forest">Technical</span>
+          </div>
+          <p class="text-sm sm:text-base text-inkMuted leading-relaxed">Analytical debugging, breaking down engineering tasks, and structured logic.</p>
+        </div>
+
+        <div class="skill-card notebook-card bg-sand border border-sandDark rounded-2xl p-5" data-category="leadership">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold text-lg text-ink flex items-center gap-2">
+              <i class="fa-solid fa-users text-terracotta"></i> Leadership
+            </span>
+            <span class="text-xs font-bold px-2.5 py-0.5 rounded bg-terracotta/15 text-terracottaDark">Leadership</span>
+          </div>
+          <p class="text-sm sm:text-base text-inkMuted leading-relaxed">Serving as Class Representative (CR) and Vice President of Mega Computing Club.</p>
+        </div>
+
+        <div class="skill-card notebook-card bg-sand border border-sandDark rounded-2xl p-5" data-category="leadership">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold text-lg text-ink flex items-center gap-2">
+              <i class="fa-solid fa-diagram-project text-forest"></i> Project Management
+            </span>
+            <span class="text-xs font-bold px-2.5 py-0.5 rounded bg-terracotta/15 text-terracottaDark">Leadership</span>
+          </div>
+          <p class="text-sm sm:text-base text-inkMuted leading-relaxed">Planning club activities, coordinating academic tasks, and maintaining web platforms.</p>
+        </div>
+
+        <div class="skill-card notebook-card bg-sand border border-sandDark rounded-2xl p-5" data-category="leadership">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold text-lg text-ink flex items-center gap-2">
+              <i class="fa-solid fa-share-nodes text-terracotta"></i> Social Media Management
+            </span>
+            <span class="text-xs font-bold px-2.5 py-0.5 rounded bg-terracotta/15 text-terracottaDark">Leadership</span>
+          </div>
+          <p class="text-sm sm:text-base text-inkMuted leading-relaxed">Managing official Facebook and Instagram communities for college and club students.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 6. FEATURED PROJECT (PU NOTES BLOG + PREVIEW DRAWER) ==================== -->
+    <section id="projects" class="reveal-section scroll-mt-24 space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b-2 border-sandDark pb-3">
+        <div>
+          <span class="text-xs uppercase tracking-widest text-terracotta font-bold">04 / Featured Work</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-ink mt-1">Projects</h2>
+        </div>
+        <a
+          href="https://github.com/ishworgupta"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 text-sm font-bold text-forest hover:text-terracotta transition-colors"
+        >
+          <i class="fa-brands fa-github"></i>
+          <span>More repositories on GitHub &rarr;</span>
         </a>
+      </div>
+
+      <article class="notebook-card bg-paper border border-sandDark rounded-3xl p-6 sm:p-8 shadow-notebook">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div class="space-y-3 max-w-3xl">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="px-3 py-1 rounded-full bg-forestLight text-forest text-xs font-bold border border-forest/20">
+                <i class="fa-solid fa-book mr-1"></i> Live Educational Web Platform
+              </span>
+              <span class="px-3 py-1 rounded-full bg-sand border border-sandDark text-inkMuted text-xs font-bold">
+                HTML &bull; Web Publishing &bull; Academic Resource Architecture
+              </span>
+            </div>
+
+            <h3 class="text-2xl sm:text-3xl font-bold text-ink">
+              <a
+                href="https://pucomputerengineeringnotes.blogspot.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-terracotta transition-colors"
+              >
+                Engineering Notes Blog Website (PU Computer Engineering Notes)
+              </a>
+            </h3>
+
+            <p class="text-base sm:text-lg text-inkMuted leading-relaxed">
+              Created and actively maintain an accessible online study portal dedicated to Purbanchal University (PU) Computer Engineering students. Organizes semester-wise lecture notes, programming guides, and exam preparation materials so peers can find reliable resources quickly.
+            </p>
+
+            <p class="text-sm font-bold text-forest break-all">
+              Live Portal: <a href="https://pucomputerengineeringnotes.blogspot.com/" target="_blank" rel="noopener noreferrer" class="underline hover:text-terracotta">https://pucomputerengineeringnotes.blogspot.com/</a>
+            </p>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap items-center gap-3 shrink-0">
+            <a
+              href="https://pucomputerengineeringnotes.blogspot.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-terracotta text-white text-base font-bold hover:bg-terracottaDark transition-colors shadow-sm"
+            >
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              <span>Visit Blog</span>
+            </a>
+
+            <button
+              type="button"
+              onclick="toggleNotesPreview()"
+              class="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-sand border border-sandDark text-ink text-base font-bold hover:bg-sandDark/70 transition-colors cursor-pointer"
+            >
+              <i class="fa-regular fa-eye"></i>
+              <span>Preview Portal Structure</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Expandable Notes Portal Structure Drawer -->
+        <div id="notesPreviewDrawer" class="hidden mt-6 pt-6 border-t border-sandDark">
+          <p class="text-sm font-bold text-forest mb-3">PU Computer Engineering Notes &mdash; Organized Resource Categories:</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
+            <div class="bg-sand p-3.5 rounded-xl border border-sandDark">
+              <p class="font-bold text-ink">01. C &amp; C++ Lab Guides</p>
+              <p class="text-xs text-inkMuted mt-1">Structured programming examples, OOP concepts, and lab sheets.</p>
+            </div>
+            <div class="bg-sand p-3.5 rounded-xl border border-sandDark">
+              <p class="font-bold text-ink">02. Semester Syllabus Notes</p>
+              <p class="text-xs text-inkMuted mt-1">Topic-by-topic study guides aligned with Purbanchal University.</p>
+            </div>
+            <div class="bg-sand p-3.5 rounded-xl border border-sandDark">
+              <p class="font-bold text-ink">03. Past Exam Questions</p>
+              <p class="text-xs text-inkMuted mt-1">Archived board question collections for focused exam preparation.</p>
+            </div>
+            <div class="bg-sand p-3.5 rounded-xl border border-sandDark">
+              <p class="font-bold text-ink">04. Student Community Updates</p>
+              <p class="text-xs text-inkMuted mt-1">Connected with student social platforms for instant resource sharing.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ==================== 7. LEADERSHIP & CAMPUS ROLES ==================== -->
+    <section id="leadership" class="reveal-section scroll-mt-24 space-y-6">
+      <div class="border-b-2 border-sandDark pb-3">
+        <span class="text-xs uppercase tracking-widest text-terracotta font-bold">05 / Responsibility &amp; Community</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-ink mt-1">Leadership &amp; Campus Roles</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Role 1: Vice President — Mega Computing Club -->
+        <div class="notebook-card bg-sand border border-sandDark rounded-3xl p-6 flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="w-11 h-11 rounded-xl bg-terracotta text-white flex items-center justify-center text-lg">
+              <i class="fa-solid fa-users-gear"></i>
+            </div>
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-terracotta">Executive Leadership</span>
+              <h3 class="text-xl font-bold text-ink mt-0.5">Vice President</h3>
+              <p class="text-base font-bold text-forest">Mega Computing Club</p>
+            </div>
+            <p class="text-base text-inkMuted leading-relaxed">
+              Co-founded and manage day-to-day club operations for engineering students, organize technical initiatives, and handle the club's official Facebook and Instagram accounts.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-sandDark text-xs">
+            <span class="text-inkMuted">Club Email: </span>
+            <a href="mailto:megacomputingclub@gmail.com" class="font-bold text-ink hover:text-terracotta underline break-all">
+              megacomputingclub@gmail.com
+            </a>
+          </div>
+        </div>
+
+        <!-- Role 2: Class Representative (CR) -->
+        <div class="notebook-card bg-sand border border-sandDark rounded-3xl p-6 flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="w-11 h-11 rounded-xl bg-forest text-white flex items-center justify-center text-lg">
+              <i class="fa-solid fa-chalkboard-user"></i>
+            </div>
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-forest">Academic Leadership</span>
+              <h3 class="text-xl font-bold text-ink mt-0.5">Class Representative (CR)</h3>
+              <p class="text-base font-bold text-forest">Mega College of Engineering</p>
+            </div>
+            <p class="text-base text-inkMuted leading-relaxed">
+              Serve as the primary bridge between Computer Engineering students and faculty, coordinating academic schedules, class communication, and collaborative peer initiatives.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-sandDark text-xs">
+            <span class="text-inkMuted">College Email: </span>
+            <a href="mailto:megaengineeringcollege@gmail.com" class="font-bold text-ink hover:text-terracotta underline break-all">
+              megaengineeringcollege@gmail.com
+            </a>
+          </div>
+        </div>
+
+        <!-- Role 3: Social Media Handler -->
+        <div class="notebook-card bg-sand border border-sandDark rounded-3xl p-6 flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="w-11 h-11 rounded-xl bg-ink text-paper flex items-center justify-center text-lg">
+              <i class="fa-solid fa-bullhorn"></i>
+            </div>
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-inkMuted">Digital Outreach</span>
+              <h3 class="text-xl font-bold text-ink mt-0.5">Social Media Handler</h3>
+              <p class="text-base font-bold text-forest">Mega Engineering Student Platforms</p>
+            </div>
+            <p class="text-base text-inkMuted leading-relaxed">
+              Manage official engineering student social platforms on Facebook and Instagram, sharing study notes, academic notices, and community updates.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-sandDark text-xs font-bold text-inkMuted">
+            Facebook, Instagram &amp; Student Blog
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 8. CONTACT & COLLABORATION (WITH ONE-CLICK COPY) ==================== -->
+    <section id="contact" class="reveal-section scroll-mt-24 bg-sand border border-sandDark rounded-3xl p-6 sm:p-10 shadow-notebook">
+      <div class="mb-8 border-b border-sandDark pb-4">
+        <span class="text-xs uppercase tracking-widest text-terracotta font-bold">06 / Reach Out</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-ink mt-1">Contact &amp; Collaboration</h2>
+        <p class="text-base text-inkMuted mt-1">
+          Open to software engineering internships, web development collaborations, and Mega Computing Club initiatives.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Left Column: Direct Emails with Copy Buttons & Phone -->
+        <div class="lg:col-span-5 space-y-3.5">
+          <!-- Personal Email -->
+          <div class="bg-paper border border-sandDark rounded-2xl p-4 flex items-center justify-between gap-3">
+            <div class="min-w-0">
+              <span class="text-xs uppercase tracking-wider text-terracotta font-bold block">Personal Email</span>
+              <a href="mailto:guptaishwor949@gmail.com" class="text-sm sm:text-base font-bold text-ink hover:text-terracotta truncate block mt-0.5">
+                guptaishwor949@gmail.com
+              </a>
+            </div>
+            <button
+              type="button"
+              onclick="copyTextToClipboard('guptaishwor949@gmail.com', 'Personal email copied!')"
+              class="px-3 py-1.5 rounded-xl bg-sand hover:bg-sandDark text-ink text-xs font-bold shrink-0 transition-colors cursor-pointer"
+            >
+              <i class="fa-regular fa-copy"></i> Copy
+            </button>
+          </div>
+
+          <!-- Club Email -->
+          <div class="bg-paper border border-sandDark rounded-2xl p-4 flex items-center justify-between gap-3">
+            <div class="min-w-0">
+              <span class="text-xs uppercase tracking-wider text-forest font-bold block">Mega Computing Club Email</span>
+              <a href="mailto:megacomputingclub@gmail.com" class="text-sm sm:text-base font-bold text-ink hover:text-terracotta truncate block mt-0.5">
+                megacomputingclub@gmail.com
+              </a>
+            </div>
+            <button
+              type="button"
+              onclick="copyTextToClipboard('megacomputingclub@gmail.com', 'Club email copied!')"
+              class="px-3 py-1.5 rounded-xl bg-sand hover:bg-sandDark text-ink text-xs font-bold shrink-0 transition-colors cursor-pointer"
+            >
+              <i class="fa-regular fa-copy"></i> Copy
+            </button>
+          </div>
+
+          <!-- College Email -->
+          <div class="bg-paper border border-sandDark rounded-2xl p-4 flex items-center justify-between gap-3">
+            <div class="min-w-0">
+              <span class="text-xs uppercase tracking-wider text-inkMuted font-bold block">College Email</span>
+              <a href="mailto:megaengineeringcollege@gmail.com" class="text-sm sm:text-base font-bold text-ink hover:text-terracotta truncate block mt-0.5">
+                megaengineeringcollege@gmail.com
+              </a>
+            </div>
+            <button
+              type="button"
+              onclick="copyTextToClipboard('megaengineeringcollege@gmail.com', 'College email copied!')"
+              class="px-3 py-1.5 rounded-xl bg-sand hover:bg-sandDark text-ink text-xs font-bold shrink-0 transition-colors cursor-pointer"
+            >
+              <i class="fa-regular fa-copy"></i> Copy
+            </button>
+          </div>
+
+          <!-- Phone -->
+          <div class="bg-paper border border-sandDark rounded-2xl p-4 flex items-center justify-between gap-3">
+            <div>
+              <span class="text-xs uppercase tracking-wider text-inkMuted font-bold block">Phone / WhatsApp</span>
+              <a href="tel:+9779821779792" class="text-base font-bold text-ink hover:text-terracotta block mt-0.5">
+                +977-9821779792
+              </a>
+            </div>
+            <a
+              href="tel:+9779821779792"
+              class="px-3.5 py-1.5 rounded-xl bg-forest text-white text-xs font-bold shrink-0 hover:bg-ink transition-colors"
+            >
+              <i class="fa-solid fa-phone mr-1"></i> Call
+            </a>
+          </div>
+
+          <!-- Social Icon Bar -->
+          <div class="pt-2">
+            <span class="text-xs font-bold text-inkMuted block mb-2">Social &amp; Academic Profiles:</span>
+            <div class="flex flex-wrap gap-2.5">
+              <a href="https://github.com/ishworgupta" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="w-10 h-10 rounded-xl bg-paper border border-sandDark flex items-center justify-center text-ink hover:bg-ink hover:text-paper transition-colors">
+                <i class="fa-brands fa-github"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/ishwor-gupta/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="w-10 h-10 rounded-xl bg-paper border border-sandDark flex items-center justify-center text-ink hover:bg-forest hover:text-white transition-colors">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </a>
+              <a href="https://pucomputerengineeringnotes.blogspot.com/" target="_blank" rel="noopener noreferrer" aria-label="Notes Blog" class="w-10 h-10 rounded-xl bg-paper border border-sandDark flex items-center justify-center text-ink hover:bg-forest hover:text-white transition-colors">
+                <i class="fa-solid fa-book-open"></i>
+              </a>
+              <a href="https://www.facebook.com/ishworgupta949" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-10 h-10 rounded-xl bg-paper border border-sandDark flex items-center justify-center text-ink hover:bg-terracotta hover:text-white transition-colors">
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+              <a href="https://www.instagram.com/ishworgupta949/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-10 h-10 rounded-xl bg-paper border border-sandDark flex items-center justify-center text-ink hover:bg-terracotta hover:text-white transition-colors">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Direct Message Form -->
+        <div class="lg:col-span-7 bg-paper border border-sandDark rounded-3xl p-6 sm:p-7">
+          <h3 class="text-xl font-bold text-ink mb-4">Send a Direct Message</h3>
+          <form id="portfolioContactForm" class="space-y-4" novalidate>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="senderName" class="block text-sm font-bold text-ink mb-1">Your Name *</label>
+                <input
+                  type="text"
+                  id="senderName"
+                  required
+                  placeholder="Enter your name"
+                  class="w-full px-4 py-2.5 rounded-xl bg-sand/60 border border-sandDark text-base text-ink focus:outline-none focus:border-terracotta"
+                />
+              </div>
+              <div>
+                <label for="senderEmail" class="block text-sm font-bold text-ink mb-1">Your Email *</label>
+                <input
+                  type="email"
+                  id="senderEmail"
+                  required
+                  placeholder="you@example.com"
+                  class="w-full px-4 py-2.5 rounded-xl bg-sand/60 border border-sandDark text-base text-ink focus:outline-none focus:border-terracotta"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label for="messageSubject" class="block text-sm font-bold text-ink mb-1">Subject *</label>
+              <select
+                id="messageSubject"
+                class="w-full px-4 py-2.5 rounded-xl bg-sand/60 border border-sandDark text-base text-ink focus:outline-none focus:border-terracotta"
+              >
+                <option value="Internship / Job Opportunity">Internship / Job Opportunity</option>
+                <option value="Web / Software Project Collaboration">Web / Software Project Collaboration</option>
+                <option value="Mega Computing Club Inquiry">Mega Computing Club Inquiry</option>
+                <option value="Academic / Notes Query">Academic / Notes Query</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="senderMessage" class="block text-sm font-bold text-ink mb-1">Message *</label>
+              <textarea
+                id="senderMessage"
+                rows="4"
+                required
+                placeholder="Write your message for Ishwor Gupta..."
+                class="w-full px-4 py-2.5 rounded-xl bg-sand/60 border border-sandDark text-base text-ink focus:outline-none focus:border-terracotta resize-y"
+              ></textarea>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+              <button
+                type="submit"
+                class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-terracotta text-white text-base font-bold hover:bg-terracottaDark transition-colors cursor-pointer shadow-sm"
+              >
+                <i class="fa-regular fa-paper-plane"></i>
+                <span>Send Message</span>
+              </button>
+              <span class="text-xs text-inkMuted">Reaches <strong class="text-ink">guptaishwor949@gmail.com</strong></span>
+            </div>
+
+            <div id="formFeedbackBox" class="hidden rounded-2xl p-3.5 text-sm font-bold"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== 9. FOOTER ==================== -->
+  <footer class="border-t border-sandDark bg-paper">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-inkMuted">
+      <p>&copy; <span id="currentYear"></span> Ishwor Gupta &bull; Computer Engineering Student, Mega College of Engineering.</p>
+
+      <div class="flex flex-wrap items-center justify-center sm:justify-end gap-4">
+        <button type="button" onclick="openResumeModal()" class="hover:text-terracotta font-bold cursor-pointer">Resume</button>
+        <a href="https://pucomputerengineeringnotes.blogspot.com/" target="_blank" rel="noopener noreferrer" class="hover:text-terracotta">Notes Blog</a>
+        <a href="https://github.com/ishworgupta" target="_blank" rel="noopener noreferrer" class="hover:text-terracotta">GitHub</a>
+        <a href="https://www.linkedin.com/in/ishwor-gupta/" target="_blank" rel="noopener noreferrer" class="hover:text-terracotta">LinkedIn</a>
+        <a href="#top" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-sand border border-sandDark text-ink hover:border-terracotta transition-colors">
+          <i class="fa-solid fa-arrow-up"></i> Top
+        </a>
+      </div>
     </div>
+  </footer>
 
-    <div class="card">
-        <h2>Leadership & Roles</h2>
-        <p>Class Representative (CR) – Mega College of Engineering</p>
-        <p>Social Media Handler – Mega Engineering Student Platforms</p>
+  <!-- ==================== 10. PRINTABLE RESUME MODAL ==================== -->
+  <div
+    id="resumeModal"
+    class="hidden fixed inset-0 z-50 bg-ink/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="resumeModalTitle"
+  >
+    <div id="resumeContainer" class="bg-white w-full max-w-3xl rounded-2xl shadow-2xl border border-gray-300 overflow-hidden my-auto">
+      <!-- Top Action Bar (Hidden when printing) -->
+      <div class="no-print bg-sand px-5 py-3.5 border-b border-sandDark flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-forest"></span>
+          <h3 id="resumeModalTitle" class="font-bold text-base text-ink">Resume &mdash; Ishwor Gupta</h3>
+        </div>
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            onclick="window.print()"
+            class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-forest text-white text-sm font-bold hover:bg-ink transition-colors cursor-pointer"
+          >
+            <i class="fa-solid fa-print"></i>
+            <span>Print / Save as PDF</span>
+          </button>
+          <button
+            type="button"
+            onclick="closeResumeModal()"
+            class="px-3 py-1.5 rounded-lg bg-paper border border-sandDark text-sm font-bold text-ink hover:bg-sandDark transition-colors cursor-pointer"
+          >
+            Close &times;
+          </button>
+        </div>
+      </div>
+
+      <!-- Single-Column Resume Document (Times New Roman) -->
+      <div id="resumePrintableArea" class="p-6 sm:p-10 text-gray-900 text-sm leading-relaxed max-h-[82vh] overflow-y-auto" style="font-family: 'Times New Roman', Times, Georgia, serif;">
+        <!-- Header -->
+        <div class="text-center border-b-2 border-gray-900 pb-3.5">
+          <h1 class="text-2xl sm:text-3xl font-bold tracking-wide uppercase text-gray-900">ISHWOR GUPTA</h1>
+          <p class="text-xs sm:text-sm font-bold text-gray-800 mt-1">
+            Computer Engineering Student (2nd Year) | Class Representative | Vice President, Mega Computing Club
+          </p>
+          <p class="text-xs text-gray-800 mt-1">
+            Phone: +977-9821779792 | Email: <a href="mailto:guptaishwor949@gmail.com" class="underline">guptaishwor949@gmail.com</a>
+          </p>
+          <p class="text-xs text-gray-800 mt-1 break-all">
+            GitHub: <a href="https://github.com/ishworgupta" target="_blank" rel="noopener noreferrer" class="underline">github.com/ishworgupta</a> |
+            LinkedIn: <a href="https://www.linkedin.com/in/ishwor-gupta/" target="_blank" rel="noopener noreferrer" class="underline">linkedin.com/in/ishwor-gupta/</a> |
+            Blog: <a href="https://pucomputerengineeringnotes.blogspot.com/" target="_blank" rel="noopener noreferrer" class="underline">pucomputerengineeringnotes.blogspot.com</a>
+          </p>
+        </div>
+
+        <!-- Summary -->
+        <div class="mt-4">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-gray-900 border-b border-gray-400 pb-0.5">Summary</h2>
+          <p class="mt-2 text-xs sm:text-sm text-gray-800 leading-relaxed">
+            Dedicated 2nd-year Bachelor of Computer Engineering student at Mega College of Engineering with proven leadership experience as Class Representative (CR) and Vice President of Mega Computing Club. Skilled in Python, C, C++, HTML, and web development, with hands-on experience building educational web platforms and managing student tech communities. Seeking a software development or web engineering internship to apply problem-solving skills and contribute to real-world projects.
+          </p>
+        </div>
+
+        <!-- Education -->
+        <div class="mt-4">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-gray-900 border-b border-gray-400 pb-0.5">Education</h2>
+          <div class="mt-2">
+            <div class="flex flex-col sm:flex-row sm:justify-between">
+              <p class="font-bold text-gray-900">Bachelor in Computer Engineering</p>
+              <p class="text-xs sm:text-sm italic text-gray-800">2nd Year &ndash; Ongoing</p>
+            </div>
+            <p class="text-xs sm:text-sm text-gray-800">Mega College of Engineering (Affiliated with Purbanchal University)</p>
+            <p class="text-xs text-gray-700 mt-0.5">
+              Relevant Focus: Programming in C &amp; C++, Python, Web Development, Data Structures, and Problem Solving.
+            </p>
+          </div>
+        </div>
+
+        <!-- Technical & Leadership Skills -->
+        <div class="mt-4">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-gray-900 border-b border-gray-400 pb-0.5">Skills</h2>
+          <ul class="mt-2 space-y-1 text-xs sm:text-sm text-gray-800 list-disc list-inside">
+            <li><strong>Programming &amp; Web Technologies:</strong> Python, C Programming, C++, HTML, Web Development, Problem Solving</li>
+            <li><strong>Leadership &amp; Management:</strong> Student Leadership, Project Management, Academic Coordination, Social Media Management</li>
+          </ul>
+        </div>
+
+        <!-- Projects -->
+        <div class="mt-4">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-gray-900 border-b border-gray-400 pb-0.5">Projects</h2>
+          <div class="mt-2">
+            <p class="font-bold text-gray-900">
+              Engineering Notes Blog Website (PU Computer Engineering Notes) &mdash;
+              <a href="https://pucomputerengineeringnotes.blogspot.com/" target="_blank" rel="noopener noreferrer" class="underline font-normal text-xs">
+                pucomputerengineeringnotes.blogspot.com
+              </a>
+            </p>
+            <ul class="mt-1 space-y-1 text-xs sm:text-sm text-gray-800 list-disc list-inside">
+              <li>Developed and maintain an educational web platform providing structured Computer Engineering notes and study resources for Purbanchal University students.</li>
+              <li>Organized semester-wise study materials for easy navigation and accessibility across engineering cohorts.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Leadership & Campus Roles -->
+        <div class="mt-4">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-gray-900 border-b border-gray-400 pb-0.5">Leadership &amp; Campus Roles</h2>
+          <ul class="mt-2 space-y-2 text-xs sm:text-sm text-gray-800 list-disc list-inside">
+            <li>
+              <strong>Vice President &mdash; Mega Computing Club</strong> (<a href="mailto:megacomputingclub@gmail.com" class="underline">megacomputingclub@gmail.com</a>):
+              Lead club operations, coordinate student technical programs, and manage official Facebook and Instagram communities.
+            </li>
+            <li>
+              <strong>Class Representative (CR) &mdash; Mega College of Engineering</strong> (<a href="mailto:megaengineeringcollege@gmail.com" class="underline">megaengineeringcollege@gmail.com</a>):
+              Facilitate academic coordination, student-faculty communication, and collaborative peer-learning initiatives.
+            </li>
+            <li>
+              <strong>Social Media Handler &mdash; Mega Engineering Student Platforms:</strong>
+              Manage digital outreach, academic announcements, and student engagement across social media channels.
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="card">
-        <h2>Contact</h2>
-        <p>📧 College Email: megaengineeringcollege@gmail.com</p>
-        <p>📧 Personal Email: guptaishwor949@gmail.com</p>
-        <p>📱 Phone: 9821779792</p>
-    </div>
+  <!-- ==================== TOAST NOTIFICATION ==================== -->
+  <div
+    id="toastNotification"
+    class="fixed bottom-5 right-5 z-50 hidden items-center gap-2 px-4 py-3 rounded-xl bg-ink text-paper text-sm font-bold shadow-lg"
+    role="status"
+  >
+    <i class="fa-solid fa-circle-check text-terracotta"></i>
+    <span id="toastMessage">Copied!</span>
+  </div>
 
-    <div class="card">
-        <h2>Contact Me (Form)</h2>
-        <form action="mailto:guptaishwor949@gmail.com" method="post" enctype="text/plain">
-            <input type="text" placeholder="Your Name">
-            <input type="email" placeholder="Your Email">
-            <textarea rows="5" placeholder="Your Message"></textarea>
-            <button class="btn" type="submit">Send Message</button>
-        </form>
-    </div>
+  <!-- ==================== 11. JAVASCRIPT INTERACTIVITY ==================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Dynamic Copyright Year
+      const yearEl = document.getElementById('currentYear');
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+      }
 
-    <div class="card">
-        <h2>Social Links</h2>
+      // 2. Human-Paced Natural Role Typing Animation
+      const typingTarget = document.getElementById('humanTypingText');
+      const roles = [
+        'Computer Engineering Student (2nd Year)',
+        'Vice President @ Mega Computing Club',
+        'Class Representative (CR)',
+        'Aspiring Software & Web Developer'
+      ];
 
-        <a class="btn" href="https://github.com/ishworgupta" target="_blank">GitHub</a>
-        <a class="btn" href="https://www.linkedin.com/in/ishwor-gupta-02989a3b2" target="_blank">LinkedIn</a>
-        <a class="btn" href="https://www.facebook.com/ishworgupta949" target="_blank">Facebook</a>
-        <a class="btn" href="https://www.instagram.com/ishworgupta949/" target="_blank">Instagram</a>
-    </div>
+      let roleIdx = 0;
+      let charIdx = roles[0].length;
+      let isDeleting = true;
 
-</section>
+      function typeHumanPace() {
+        if (!typingTarget) return;
+        const currentText = roles[roleIdx];
 
-<footer>
-    © 2026 Ishwor Gupta | Portfolio Website
-</footer>
+        if (isDeleting) {
+          charIdx--;
+          typingTarget.textContent = currentText.substring(0, charIdx);
+        } else {
+          charIdx++;
+          typingTarget.textContent = currentText.substring(0, charIdx);
+        }
 
+        let delay = isDeleting ? 35 : 68 + Math.floor(Math.random() * 45);
+
+        if (!isDeleting && charIdx === currentText.length) {
+          delay = 2100;
+          isDeleting = true;
+        } else if (isDeleting && charIdx === 0) {
+          isDeleting = false;
+          roleIdx = (roleIdx + 1) % roles.length;
+          delay = 420;
+        }
+
+        setTimeout(typeHumanPace, delay);
+      }
+      setTimeout(typeHumanPace, 1800);
+
+      // 3. Interactive Skill Category Filter Tabs
+      const skillTabBtns = document.querySelectorAll('.skill-tab-btn');
+      const skillCards = document.querySelectorAll('.skill-card');
+
+      skillTabBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const filter = btn.getAttribute('data-filter');
+
+          skillTabBtns.forEach((b) => {
+            b.classList.remove('bg-ink', 'text-paper');
+            b.classList.add('text-inkMuted');
+          });
+          btn.classList.add('bg-ink', 'text-paper');
+          btn.classList.remove('text-inkMuted');
+
+          skillCards.forEach((card) => {
+            const category = card.getAttribute('data-category');
+            if (filter === 'all' || category === filter) {
+              card.classList.remove('hidden');
+            } else {
+              card.classList.add('hidden');
+            }
+          });
+        });
+      });
+
+      // 4. Contact Form Submission
+      const contactForm = document.getElementById('portfolioContactForm');
+      const feedbackBox = document.getElementById('formFeedbackBox');
+
+      if (contactForm && feedbackBox) {
+        contactForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const name = document.getElementById('senderName').value.trim();
+          const email = document.getElementById('senderEmail').value.trim();
+          const subject = document.getElementById('messageSubject').value;
+          const message = document.getElementById('senderMessage').value.trim();
+
+          if (!name || !email || !message) {
+            feedbackBox.className = 'rounded-2xl p-3.5 text-sm font-bold bg-terracotta/15 text-terracottaDark border border-terracotta/30';
+            feedbackBox.textContent = 'Please fill in your name, email, and message before sending.';
+            feedbackBox.classList.remove('hidden');
+            return;
+          }
+
+          feedbackBox.className = 'rounded-2xl p-3.5 text-sm font-bold bg-forestLight text-forest border border-forest/30';
+          feedbackBox.textContent = `Thank you, ${name}! Opening your email client to send your message to guptaishwor949@gmail.com.`;
+          feedbackBox.classList.remove('hidden');
+
+          const mailtoLink = `mailto:guptaishwor949@gmail.com?subject=${encodeURIComponent(subject + ' - from ' + name)}&body=${encodeURIComponent('From: ' + name + ' (' + email + ')\n\n' + message)}`;
+          window.location.href = mailtoLink;
+          contactForm.reset();
+        });
+      }
+
+      // 5. Scroll Reveal Observer
+      const revealEls = document.querySelectorAll('.reveal-section');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+        revealEls.forEach((el) => observer.observe(el));
+      } else {
+        revealEls.forEach((el) => el.classList.add('is-visible'));
+      }
+    });
+
+    // Mobile Menu Controls
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.add('hidden');
+    }
+
+    // Notes Portal Structure Preview Toggle
+    function toggleNotesPreview() {
+      const drawer = document.getElementById('notesPreviewDrawer');
+      if (drawer) {
+        drawer.classList.toggle('hidden');
+      }
+    }
+
+    // Resume Modal Controls
+    function openResumeModal() {
+      document.getElementById('resumeModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeResumeModal() {
+      document.getElementById('resumeModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('resumeModal').addEventListener('click', (e) => {
+      if (e.target.id === 'resumeModal') closeResumeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeResumeModal();
+    });
+
+    // Copy Email Helper
+    function copyTextToClipboard(text, message) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => showToast(message));
+        return;
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showToast(message || 'Copied!');
+      } catch (err) {
+        showToast('Please copy manually.');
+      }
+      document.body.removeChild(textarea);
+    }
+
+    // Toast Banner Helper
+    let toastTimer;
+    function showToast(msg) {
+      const toast = document.getElementById('toastNotification');
+      const toastMsg = document.getElementById('toastMessage');
+      if (!toast || !toastMsg) return;
+
+      toastMsg.textContent = msg;
+      toast.classList.remove('hidden');
+      toast.classList.add('flex');
+
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.add('hidden');
+        toast.classList.remove('flex');
+      }, 3000);
+    }
+  </script>
 </body>
 </html>
