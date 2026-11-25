@@ -414,14 +414,28 @@
       <div class="bg-paper border border-sandDark rounded-3xl p-6 sm:p-8 shadow-notebook relative overflow-hidden space-y-5">
         <div class="absolute top-0 left-0 w-1.5 h-full bg-forest"></div>
 
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
           <div class="space-y-1.5">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-forestLight text-forest text-xs font-bold">
               <i class="fa-solid fa-graduation-cap"></i>
               <span>2nd Year &bull; Currently Pursuing</span>
             </div>
             <h3 class="text-2xl font-bold text-ink pt-1">Bachelor in Computer Engineering</h3>
-            <p class="text-lg font-bold text-terracotta">Mega College of Engineering</p>
+
+            <!-- College Name + Official College Website Link -->
+            <div class="flex flex-wrap items-center gap-3 pt-0.5">
+              <p class="text-lg font-bold text-terracotta">Mega College of Engineering</p>
+              <a
+                href="https://megacoe.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-sand border border-sandDark text-xs sm:text-sm font-bold text-ink hover:border-terracotta hover:text-terracotta transition-colors"
+              >
+                <i class="fa-solid fa-arrow-up-right-from-square text-terracotta"></i>
+                <span>Official College Website</span>
+              </a>
+            </div>
+
             <p class="text-sm sm:text-base text-inkMuted">Affiliated with Purbanchal University</p>
           </div>
 
